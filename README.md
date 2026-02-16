@@ -25,25 +25,16 @@ Dynamic Scaling: The simulator automatically scales physical world coordinates (
 📊 Output Example
 The simulator visualizes the ball's trajectory from the initial launch height down to the ground level directly in the terminal. It features a dynamic Y-axis (vertical pole) representing the launch height and a horizontal X-axis representing the ground level.
 
-
 // Example
 
 Oblique Shot Simulation
-
 Enter first cordinate-X: 0
-
 Enter first cordinate-Y: 0
-
 Enter first speed: 20
-
 Enter shot degree: 30
-
 Enter delta-time: 0.1
-
 Enter gravity: 10
-
 Enter screen-width: 100
-
 Enter screen-height: 60
 
 maxWidth: 34.641016, maxHeight: 5.000000, time: 2.000000
