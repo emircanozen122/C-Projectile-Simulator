@@ -29,13 +29,21 @@ The simulator visualizes the ball's trajectory from the initial launch height do
 // Example
 
 Oblique Shot Simulation
+
 Enter first cordinate-X: 0
+
 Enter first cordinate-Y: 0
+
 Enter first speed: 20
+
 Enter shot degree: 30
+
 Enter delta-time: 0.1
+
 Enter gravity: 10
+
 Enter screen-width: 100
+
 Enter screen-height: 60
 
 maxWidth: 34.641016, maxHeight: 5.000000, time: 2.000000
