@@ -24,7 +24,7 @@ char* createScreen(int w, int h);
 char* fillScreenWithPoints(char *screen, int screenWidth, int screenHeight, double maxWidth,double maxHeight,double *xCoords, double *yCoords, int pointCount);
 double angleToRadian(double angle);
 void calcMaxHeightAndWidth(double firstPositionX,double firstPositionY,double firstSpeedX,double firstSpeedY,double gravity,double* outMaxWidth,double * outMaxHeight,double *outTimeOfFlight);
-void simulationOfObliqueShot(struct Ball *ball,double positionX, double positionY,double firstSpeed,double shotAngle,double deltaTime,double gravity);
+void simulationOfObliqueShot(struct Ball *ball,double positionX, double positionY,double firstSpeed,double shotAngle,double deltaTime,double gravity,int screenWidth,int screenHeight);
 //function declaration
 
 
@@ -35,20 +35,27 @@ int main()
         printf("Bellek hatasi: Yeterli alan yok!\n");
         return EXIT_FAILURE;
     }
-   simulationOfObliqueShot(ball,0,0,20,30,0.1,10);
+   simulationOfObliqueShot(ball,0,0,20,30,0.1,10,100,60);
     free(ball);
     return 0;
 }
 
-void simulationOfObliqueShot(struct Ball *ball,double positionX, double positionY,double firstSpeed,double shotAngle,double deltaTime,double gravity){
+
+void simulationOfObliqueShot(struct Ball *ball,double positionX, double positionY,double firstSpeed,double shotAngle,double deltaTime,double gravity,int screenWidth,int screenHeight){
     double timeOfFlight = .0;
-     char* screen = createScreen(100, 60);    
+    
      
     printf("Oblique Shot Simulation\n");
      printf("Enter first cordinate-X: ");scanf("%lf",&positionX);
      printf("Enter first cordinate-Y: ");scanf("%lf",&positionY);
     printf("Enter first speed: ");scanf("%lf",&firstSpeed);
     printf("Enter shot degree: ");scanf("%lf",&shotAngle);
+      printf("Enter delta-time: ");scanf("%lf",&deltaTime);
+     printf("Enter gravity: ");scanf("%lf",&gravity);
+      printf("Enter screen-width: ");scanf("%d",&screenWidth);
+        printf("Enter screen-height: ");scanf("%d",&screenHeight);
+     char* screen = createScreen(screenWidth, screenHeight);    
+
     ball->position.x = positionX;
     ball->position.y = positionY;
     shotAngle = angleToRadian(shotAngle);
@@ -56,7 +63,7 @@ void simulationOfObliqueShot(struct Ball *ball,double positionX, double position
     double firstSpeedY=firstSpeed * sin(shotAngle);
     double maxWidth,maxHeight,totalTimeOfFlight;
     
-    calcMaxHeightAndWidth(positionX,positionY,firstSpeedX,firstSpeedY,gravity,&maxWidth,&maxHeight,&totalTimeOfFlight);
+        (positionX,positionY,firstSpeedX,firstSpeedY,gravity,&maxWidth,&maxHeight,&totalTimeOfFlight);
     
     int pointsNumber = totalTimeOfFlight / deltaTime;
     
@@ -93,9 +100,9 @@ void simulationOfObliqueShot(struct Ball *ball,double positionX, double position
     }
     
         printf("\n\n");
-        fillScreenWithPoints(screen, 100, 60,maxWidth , maxHeight, ballCordinatesX,  ballCordinatesY, k);
+        fillScreenWithPoints(screen, screenWidth, screenHeight,maxWidth , maxHeight, ballCordinatesX,  ballCordinatesY, k);
         
-        printObliqueShotPoitns(screen, 100, 60);
+        printObliqueShotPoitns(screen, screenWidth, screenHeight);
 
     free(screen);
     
@@ -142,8 +149,8 @@ char* fillScreenWithPoints(char *screen, int screenWidth, int screenHeight, doub
 
     // 3. ADIM: YILDIZLAR (Bağımsız, ayrı bir döngü)
     for (int k = 0; k < pointCount; k++) {
-        int draw_x = (int)(*(xCoords + k) * scaleX - 0.5);
-        int draw_y = (int)(*(yCoords + k) * scaleY - 0.5);
+        int draw_x = (int)(*(xCoords + k) * scaleX + 0.5);
+        int draw_y = (int)(*(yCoords + k) * scaleY + 0.5);
 
         if (draw_x >= screenWidth) draw_x = screenWidth - 1;
         if (draw_x < 0) draw_x = 0;
